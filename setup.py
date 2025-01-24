@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name='easyolo',
+    name='EasYoloD',
     version='0.1',
     description='easyolo python library',
     long_description=long_description,
@@ -14,7 +14,7 @@ setup(
     author='zaixia108',
     author_email='xvbowen2012@gmail.com',  # 添加您的邮箱
     license='MIT',
-    packages=['easyolo'],
+    packages=['EasYoloD'],
     install_requires=[
         'opencv-python<=4.8.0.74',
         'numpy<=1.26'
