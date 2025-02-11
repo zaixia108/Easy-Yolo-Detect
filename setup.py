@@ -16,10 +16,10 @@ setup(
     license='MIT',
     packages=['EasYoloD'],
     install_requires=[
-        'opencv-python<=4.8.0.74',
+        'opencv-python<=4.10.0.84',
         'numpy<=1.26'
     ],
-    python_requires='>=3.8, <3.14',
+    python_requires='>=3.8, <3.13',
     url='https://github.com/zaixia108/easyolo',
     project_urls={
         "Bug Tracker": "https://github.com/zaixia108/easyolo/issues",
@@ -36,7 +36,6 @@ setup(
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
-        'Programming Language :: Python :: 3.13',
         'Operating System :: OS Independent',
     ],
     keywords='yolo, object detection, computer vision',

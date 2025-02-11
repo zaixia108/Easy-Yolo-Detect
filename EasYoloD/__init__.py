@@ -8,7 +8,7 @@ Created: 2025-01-24
 """
 
 # 版本信息
-__version__ = '0.1'
+__version__ = '0.1.3'
 __author__ = 'zaixia108'
 __license__ = 'MIT'
 
