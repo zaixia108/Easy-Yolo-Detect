@@ -22,7 +22,7 @@ Easy Yolo Detect
 ## 安装和使用
 
 ```bash
-pip install easyolod
+pip install EasYoloD
 ```
 
 Requirements
@@ -33,10 +33,10 @@ Requirements
 使用: 
 
 ```python
-import easyolod
+import EasYoloD
 
-easyolod.init(provider='onnxruntime',gpu=False) # onnxruntime-directml 则使用onnxdml，openvino使用 openvino
-model = easyolod.Model()
+EasYoloD.init(provider='onnxruntime',gpu=False) # onnxruntime-directml 则使用onnxdml，openvino使用 openvino
+model = EasYoloD.Model()
 # conf 置信度
 # ious
 # namse 可以是文件，也可以是一个list
