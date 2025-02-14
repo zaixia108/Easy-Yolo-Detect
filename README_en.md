@@ -1,56 +1,59 @@
 # EasYoloD
 
-Easy Yolo Detect
+Easy Yolo Detection
 
-用户快速部署yolo的识别程序，支持onnxruntime, opencv(dnn), openvino
+A tool for users to quickly deploy YOLO detection programs, supporting onnxruntime, opencv(dnn), and openvino.
 
-仅需简短几行代码即可实现yolo目标检测
+With just a few lines of code, you can implement YOLO object detection.
 
-## Provider 介绍
+## Provider Introduction
 
-1. onnxruntime:
-    + cpu: 适配性最高的版本，不需要GPU即可执行
-    + gpu: onnxruntime-gpu 需要英伟达GPU，并且安装对应版本cuda，cudnn之后才能使用，速度快
-    + onnxdml: onnxruntime-directml 不需要使用特定GPU，核显也可以允许，而且不需要安装任何额外程序，速度一般，而且仅适用与windos系统
-1. openvino: 
-    + cpu: 同onnx的cpu一样
-    + gpu: 仅适用于intel的GPU，其他GPU不可用
-1. opencv: 
-    + cpu: 同上
-    + gpu: 需要单独编译带有cuda的opencv包，并正确配置路径，并且安装好cuda和cudnn，速度快
+1. **onnxruntime**:
+    + **cpu**: The most compatible version, does not require a GPU to run.
+    + **gpu**: onnxruntime-gpu requires an NVIDIA GPU and the corresponding version of CUDA and cuDNN to be installed. It offers fast performance.
+    + **onnxdml**: onnxruntime-directml does not require a specific GPU and can run on integrated graphics. No additional programs need to be installed. It offers moderate performance and is only available on Windows systems.
 
-## 安装和使用
+2. **openvino**:
+    + **cpu**: Similar to onnxruntime's CPU version.
+    + **gpu**: Only compatible with Intel GPUs, other GPUs are not supported.
+
+3. **opencv**:
+    + **cpu**: Similar to the above.
+    + **gpu**: Requires a separately compiled OpenCV package with CUDA support, correctly configured paths, and CUDA and cuDNN installed. It offers fast performance.
+
+## Installation and Usage
 
 ```bash
 pip install EasYoloD
 ```
 
-Requirements
+### Requirements
 + Python 3.8-3.12
 + opencv-python <= 4.10.0.84
 + numpy <= 1.26
 
-使用: 
+### Usage:
 
 ```python
 import EasYoloD
 
-EasYoloD.init(provider='onnxruntime',gpu=False) # onnxruntime-directml 则使用onnxdml，openvino使用 openvino
+EasYoloD.init(provider='onnxruntime', gpu=False) # Use 'onnxdml' for onnxruntime-directml, 'openvino' for openvino
 model = EasYoloD.Model()
-# conf 置信度
-# ious
-# namse 可以是文件，也可以是一个list
+# conf: confidence threshold
+# ious: IoU threshold
+# names: can be a file or a list
 model.load('modelpath', conf, ious, names)
-# or 你使用的是opencv dnn yolov4的weight模型
+# Or if you are using OpenCV DNN YOLOv4 weight model
 # model.load('config path', 'weight path', inputsize, names, conf, nms)
 
 result = model.detect(img=image)
-# or 你希望自己处理输出
+# Or if you want to handle the output yourself
 # result = model.detect_only(img=image)
 ```
-输出示例:
 
-detect:
+### Output Example:
+
+**detect**:
 ```
 {
   1: [
@@ -74,7 +77,8 @@ detect:
   7: []
 }
 ```
-detect_only:
+
+**detect_only**:
 ```
 (array([[ 614.5011 ,  202.27354,  732.4082 ,  242.74388],
        [ 975.4805 ,  227.59409, 1105.0723 ,  268.69995],
