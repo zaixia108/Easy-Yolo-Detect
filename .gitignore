@@ -8,3 +8,8 @@ develop-eggs/
 dist/
 *.egg-info/
 .eggs/
+/easyolo.build
+/model
+/output
+/src
+/.idea
