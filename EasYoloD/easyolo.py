@@ -408,12 +408,12 @@ class Model:
         self.names = None
         self.accesable = False
 
-    def load(self, *args):
+    def load(self, model_path, names, conf, **kwargs):
         if Index.PROVIDER == 'onnxruntime' or Index.PROVIDER == 'onnxdml':
-            model_path = args[0]
-            conf = args[1]
-            ious = args[2]
-            names = args[3]
+            ious = kwargs.get('iou')
+            if ious is None:
+                ious = 0.5
+                print('use default iou threshold: 0.5')
             self.detector = OnxDet(model_path, conf, ious)
             if type(names) == str:
                 with open(names, 'r', encoding='utf-8') as f:
@@ -425,12 +425,17 @@ class Model:
             else:
                 raise ValueError('Unknown type of names')
         elif Index.PROVIDER == 'opencv':
-            cfg_path = args[0]
-            model_path = args[1]
-            input_size = args[2]
-            names = args[3]
-            conf = args[4]
-            nms = args[5]
+            cfg_path = kwargs.get('cfg_path', None)
+            if cfg_path is None:
+                raise ValueError('cfg_path is required for opencv provider')
+            input_size = kwargs.get('input_size')
+            if input_size is None:
+                input_size = (416, 416)
+                print('use default input size: (416, 416)')
+            nms = kwargs.get('nms')
+            if nms is None:
+                nms = 0.5
+                print('use default nms threshold: 0.5')
             self.detector = DnnDet(cfg_path, model_path, input_size, conf, nms)
             if type(names) == str:
                 with open(names, 'r', encoding='utf-8') as f:
@@ -442,10 +447,10 @@ class Model:
             else:
                 raise ValueError('Unknown type of names')
         elif Index.PROVIDER == 'openvino':
-            model_path = args[0]
-            conf = args[1]
-            ious = args[2]
-            names = args[3]
+            ious = kwargs.get('iou')
+            if ious is None:
+                ious = 0.5
+                print('use default iou threshold: 0.5')
             self.detector = OpenVinoDet(model_path, conf, ious)
             if type(names) == str:
                 with open(names, 'r', encoding='utf-8') as f:
