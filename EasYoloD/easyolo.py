@@ -74,11 +74,15 @@ def init(provider, gpu=False):
                 Index.MODULE = onnxruntime
                 providers = onnxruntime.get_available_providers()
                 if 'DmlExecutionProvider' not in providers:
+                    Index.USE_GPU = False
                     raise ImportError(
                         'DirectMLExecutionProvider is not available\nPlease make sure you have installed onnxruntime-directml')
+                Index.USE_GPU = True
             except ImportError:
+                Index.USE_GPU = False
                 raise ImportError('Please install onnxruntime-directml')
         else:
+            Index.USE_GPU = False
             raise ValueError('Unknown provider')
 
 
